@@ -4,5 +4,7 @@ if(NOT DEFINED RELEASE_F)
     message("debug version\n")
     add_definitions(-g)
 endif()
-add_definitions(-std=c++11)
+add_definitions(-std=c++17)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 add_subdirectory(test)
