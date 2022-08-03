@@ -1,6 +1,12 @@
 cmake_minimum_required(VERSION 3.10)
 project(myproj CXX)
-if(NOT DEFINED RELEASE_F)
+
+include(cmake/common.cmake)
+set(options arg1 arg2)
+print("${options}" test)
+
+option(RELEASE_F "release flag" OFF)
+if(NOT RELEASE_F)
     message("debug version\n")
     add_definitions(-g)
 endif()

@@ -1,3 +1,5 @@
-set(Bin test)
+set(BINARY_NAME test)
 aux_source_directory(. SRCS)
-add_executable(${Bin} ${SRCS})
+add_executable(${BINARY_NAME} "")
+target_sources(${BINARY_NAME} PRIVATE ${SRCS})
+#add_executable(${Bin} ${SRCS})
