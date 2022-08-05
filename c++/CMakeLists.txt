@@ -13,4 +13,5 @@ endif()
 add_definitions(-std=c++17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+add_subdirectory(koll)
 add_subdirectory(test)
