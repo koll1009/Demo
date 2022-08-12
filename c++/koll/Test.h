@@ -6,10 +6,17 @@ namespace koll {
 class Test
 {
 public:
-    Test() = default;
+    Test() = delete;
+    Test(int a, int b)
+    : a_(a)
+    , b_(b){
+        
+    }
     ~Test() = default;
     std::string getName();
 private:
+    int a_;
+    int b_;
 
 };
 
