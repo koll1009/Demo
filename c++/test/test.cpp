@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Test.h"
 #include <vector>
-
+#include "Common.h"
 
 using namespace std;
 // pre-condition of brace-enclosed initializer list
@@ -41,6 +41,11 @@ public:
 private:
     NameArray names_;
 };
+
+koll::Test fun1()
+{
+    return koll::Test(1,2);
+}
 int main(int argc,char* argv[])
 {
     ifstream fs;
@@ -62,5 +67,8 @@ int main(int argc,char* argv[])
     for (auto& name : names){
         cout << "name is " << name << "\n";
     }
+    int b = 10; //type is int&&, but b is a left value,
+    cout << is_lvalue_reference<decltype(b)>::value <<":" << koll::showMeType(std::forward<int>(b)) << "\n";
+    cout << is_lvalue_reference<decltype(10)>::value <<":" << koll::showMeType(fun1()) << "\n" ;
     return 0;
 }

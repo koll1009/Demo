@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.13)
 project(myproj CXX)
 
 include(cmake/common.cmake)
@@ -15,3 +15,4 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(koll)
 add_subdirectory(test)
+add_subdirectory(std)
