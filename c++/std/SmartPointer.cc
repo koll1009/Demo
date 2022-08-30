@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <memory>
 #include "Test.h"
+#include <functional>
+#include "Common.h"
 using namespace  std;
 int main(int args, const char* argv[])
 {
@@ -24,4 +26,9 @@ int main(int args, const char* argv[])
         std::cout << e << " ";
     }
     std::cout << "\n";
+
+    cout << "type: " << koll::showMeType(std::ref(array)) << "\n";
+
+    auto plus1 = std::bind(std::plus<int>{}, std::placeholders::_1, 1);
+    cout << "plus1 + 2: " << plus1(2) << "\n";
 }
