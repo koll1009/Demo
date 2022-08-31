@@ -46,8 +46,15 @@ koll::Test fun1()
 {
     return koll::Test(1,2);
 }
-int main(int argc,char* argv[])
+#include "gtest/gtest.h"
+TEST(Test1, Negative) {
+    cout << "first one \n";
+}
+GTEST_API_ int main(int argc,char** argv)
 {
+    testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+
     ifstream fs;
     fs.open("test.cpp");
     stringstream buf;

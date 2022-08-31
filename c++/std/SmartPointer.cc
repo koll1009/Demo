@@ -4,8 +4,9 @@
 #include "Test.h"
 #include <functional>
 #include "Common.h"
+#include "gtest/gtest.h"
 using namespace  std;
-int main(int args, const char* argv[])
+TEST(StdTest, SmartPointerTest)
 {
     cout << "Test Begin \n";
     auto shared = std::make_shared<koll::Test>(1, 2);

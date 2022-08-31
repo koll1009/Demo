@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include "gtest/gtest.h"
 using namespace std;
 
 /* [] captures no variables (cannot be omitted).
@@ -11,7 +11,7 @@ using namespace std;
 [&, x,y] captures all variables by reference except x and y, which are captured by value.
 
 [this] captures the this pointer, granting the body access to all members of the surrounding object. */
-int main(int argc, const char* argv[])
+TEST(StdTest, LambdaTest)
 {
     cout << "Test Begin \n";
     int a = 1;
@@ -34,5 +34,4 @@ int main(int argc, const char* argv[])
         return a += (b += arg1);
     };
     cout << "func5(2): " << func5(2) << " a:" << a  << " b:" << b << "\n";
-    return 1;
 }

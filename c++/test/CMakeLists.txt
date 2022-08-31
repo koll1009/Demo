@@ -3,7 +3,7 @@ message("generate binary name [${BINARY_NAME}]")
 aux_source_directory(. SRCS)
 add_executable(${BINARY_NAME} "")
 target_sources(${BINARY_NAME} PRIVATE ${SRCS})
-target_link_libraries(${BINARY_NAME} PUBLIC koll)
+target_link_libraries(${BINARY_NAME} PUBLIC koll gtest)
 
 #[[ install(TARGETS ${BINARY_NAME}
         EXPORT MyLibTargets 
