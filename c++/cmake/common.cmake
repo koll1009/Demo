@@ -14,9 +14,9 @@ function(test_func_args)
 endfunction()
 
 #[[ function(koll_add_lib)
-	set(options "") 
-	set(oneValueArgs LIB_NAME)   
-	set(multiArgs PUBLIC PRIVATE) 
+	set(options "")
+	set(oneValueArgs LIB_NAME)
+	set(multiArgs PUBLIC PRIVATE)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiArgs}" ${ARGN})
 	add_library(${ARG_LIB_NAME} SHARED)
 	message("library name is [${ARG_LIB_NAME}]")
@@ -26,13 +26,24 @@ endfunction()
 endfunction() ]]
 
 function(koll_add_lib)
-	set(options "") 
-	set(oneValueArgs LIB_NAME)   
-	set(multiArgs PUBLIC PRIVATE) 
+	set(options "")
+	set(oneValueArgs LIB_NAME)
+	set(multiArgs PUBLIC PRIVATE)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiArgs}" ${ARGN})
 	add_library(${ARG_LIB_NAME} SHARED)
 	message("library name is [${ARG_LIB_NAME}]")
+
+	#The PRIVATE and PUBLIC keywords specify where those corresponding sources should be used.
+	#PRIVATE simply means those sources should only be added to myLib ,
+	#whereas PUBLIC means those sources should be added to myLib and to any target that links to myLib
 	target_sources(${ARG_LIB_NAME} PRIVATE ${ARG_PRIVATE} PUBLIC ${ARG_PUBLIC})
+
+	#[[PRIVATE: The includes can only be used by the helpers-library itself.
+	   PUBLIC: The includes can be used by the helpers-library itself and any target 
+	           that uses the helpers-library, e.g. via target_link_libraries
+			   (MainApplication PUBLIC libhelpers).
+       INTERFACE: The includes can't be used by the helpers-library, only by targets that 
+	              use the helpers-library.]]
 	target_include_directories(${ARG_LIB_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 endfunction()
 
