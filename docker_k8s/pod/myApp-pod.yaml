@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+  labels:
+    name: myapp
+spec:
+  containers:
+  - name: myapp
+    image: k8s:test
+    imagePullPolicy: Never #use local images
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    env: 
+      - name: name #define two evnvironment variables
+        value: koll
+      - name: age
+        value: "36"
+      - name: wife #define a env var from configMap
+        valueFrom:
+          configMapKeyRef:
+            name: myapp
+            key: wife
+      - name: testSecret
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: password
+    envFrom:
+      - configMapRef: #introduce all envs from configmap called myapp
+          name: myapp
+      - secretRef: #introduce all envs from secret called mysecret
+          name: mysecret
+
+  
+          
+      
+            
+
