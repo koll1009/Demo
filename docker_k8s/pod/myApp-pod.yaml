@@ -5,6 +5,10 @@ metadata:
   labels:
     name: myapp
 spec:
+  securityContext: #pod level security Context, it applies for all containers in this pod
+    runAsUser: 1000
+    capbilities:
+      add: ["MAC_ADMIN"]
   containers:
   - name: myapp
     image: k8s:test
@@ -13,7 +17,11 @@ spec:
       limits:
         memory: "128Mi"
         cpu: "500m"
-    env: 
+    securityContext: #container level security Context, it will override the context defined in pod
+      runAsUser: 1000
+      capabilities: # only support container level definition
+        add: ["MAC_ADMIN"]
+    env:
       - name: name #define two evnvironment variables
         value: koll
       - name: age
@@ -34,8 +42,8 @@ spec:
       - secretRef: #introduce all envs from secret called mysecret
           name: mysecret
 
-  
-          
-      
-            
+
+
+
+
 
