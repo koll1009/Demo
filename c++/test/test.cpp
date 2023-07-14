@@ -78,6 +78,4 @@ GTEST_API_ int main(int argc,char** argv)
     cout << is_lvalue_reference<decltype(b)>::value <<":" << koll::showMeType(b) << "\n";
     cout << is_lvalue_reference<decltype(10)>::value <<":" << koll::showMeType(fun1()) << "\n" ;
     return 0;
-
-    
 }
