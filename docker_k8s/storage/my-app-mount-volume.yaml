@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-volume
+  labels:
+    name: myapp-volume
+spec:
+  containers:
+  - name: myapp
+    image: alpine
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+    volumeMounts:
+      - mountPath: /opt/data
+        name: myapp-volume-for-pod
+  
+  volumes:
+    - name: myapp-volume-for-pod
+      hostPath:
+        path: /data
+        type: Directory
+

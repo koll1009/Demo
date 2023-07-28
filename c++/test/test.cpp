@@ -7,27 +7,18 @@
 #include "Common.h"
 
 using namespace std;
-// pre-condition of brace-enclosed initializer list
-// 1. non private data member ( aggregate initializer)
-// 2. user defined constructor
-// 3. std::
-class test_initializer_list
-{
-public:
-    test_initializer_list(int age, string name)
-    : age_(age)
-    , name_(std::move(name))
-    , a_(1)
-    {}
 
-    test_initializer_list(std::initializer_list<int> l ):v_(l){}
-    void print(){std::cout << "age:" << age_ << " name:" << name_ << "\n"; }
-private:
-    int age_;
-    string name_;
-    int a_;
-    std::vector<int> v_;
-};
+typedef struct {
+  uint64_t time;
+  uint8_t cur_state;
+  uint8_t next_state;
+} sf_flow_states;
+
+typedef struct {
+  sf_flow_states                        states[128][8];
+  uint8_t                               counts[128];
+} sf_flow_metadata_t;
+
 
 class RangeBaseLoop
 {
@@ -53,7 +44,7 @@ TEST(Test1, Negative) {
 GTEST_API_ int main(int argc,char** argv)
 {
     testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
+    return RUN_ALL_TESTS(); 
 
     ifstream fs;
     fs.open("test.cpp");
@@ -63,9 +54,6 @@ GTEST_API_ int main(int argc,char** argv)
     cout << content.c_str() << "\n";
     koll::Test a{1,2};
     cout << "name is " << a.getName() << "\n";
-    test_initializer_list obj{1, "koll"};
-    test_initializer_list obj2{1,2,3};
-    obj.print();
     RangeBaseLoop names;
     names.push("Jerry");
     names.push("Dudu");
@@ -75,7 +63,9 @@ GTEST_API_ int main(int argc,char** argv)
         cout << "name is " << name << "\n";
     }
     int b = 10; //type is int&&, but b is a left value,
-    cout << is_lvalue_reference<decltype(b)>::value <<":" << koll::showMeType(b) << "\n";
+    int&& ttt = 1;
+    cout << is_lvalue_reference<decltype(b)>::value <<":" << koll::showMeType(10) << "\n";
     cout << is_lvalue_reference<decltype(10)>::value <<":" << koll::showMeType(fun1()) << "\n" ;
+    cout << is_rvalue_reference<decltype(ttt)>::value <<":" << koll::showMeType(ttt) << "\n";
     return 0;
 }

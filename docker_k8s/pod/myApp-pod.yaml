@@ -41,7 +41,6 @@ spec:
           name: myapp
       - secretRef: #introduce all envs from secret called mysecret
           name: mysecret
-    torlenrance:
 
 
 

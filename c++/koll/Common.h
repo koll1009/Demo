@@ -13,6 +13,11 @@ std::string showMeType(T&& t)
     type.append(std::is_lvalue_reference<decltype(t)>::value ? "&":"");
     return type;
 }
+template<typename T>
+void double_(T&& t) 
+{ 
+    t <<= 1; 
+}
 
 }
 #endif

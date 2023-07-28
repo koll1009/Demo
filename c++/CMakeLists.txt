@@ -1,19 +1,4 @@
-cmake_minimum_required(VERSION 3.13)
-project(CPP CXX)
-
-include(cmake/common.cmake)
-set(options arg1 arg2)
-print("${options}" test)
-
-option(RELEASE_F "release flag" OFF)
-if(NOT RELEASE_F)
-    message("debug version\n")
-    set(CMAKE_BUILD_TYPE Debug)
-else()
-    message("release version\n")
-endif()
-add_definitions(-std=c++17)
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+project(cpp_demo CXX)
 
 add_subdirectory(koll)
 add_subdirectory(test)
