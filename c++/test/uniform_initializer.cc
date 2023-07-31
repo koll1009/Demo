@@ -7,7 +7,7 @@
  * 2. prevent narrowing convention
  * 3. syntax for all types
  */
-#define TESTNAME UNIFORM_INITIALIZATION
+#define TESTNAME UNIFORM_INITIALIZATION_TEST
 using namespace std;
 TEST(TESTNAME, example1) {
     bool a{true};

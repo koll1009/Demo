@@ -47,6 +47,32 @@ function(koll_add_lib)
 	target_include_directories(${ARG_LIB_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 endfunction()
 
+function(koll_add_test)
+	set(oneValueArgs TEST_NAME)
+	set(multiValueArgs PRIVATE PUBLIC INTERFACE DEPENDENCIES INCLUDE_DIRECTORIES)
+	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
+
+	set(TEST_NAME ${ARG_TEST_NAME})
+	set(TEST_LABEL ${ARG_TEST_LABEL})
+
+	add_executable(${TEST_NAME} "")
+	target_sources(${TEST_NAME} PUBLIC
+			${ARG_PUBLIC}
+			PRIVATE
+			${ARG_PRIVATE}
+			INTERFACE
+			${ARG_INTERFACE}
+			)
+
+	target_link_libraries(${TEST_NAME}  ${ARG_DEPENDENCIES})
+
+	if(ARG_INCLUDE_DIRECTORIES)
+		target_include_directories(${TEST_NAME} PUBLIC ${ARG_INCLUDE_DIRECTORIES})
+	endif()
+
+	add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+endfunction()
+
 function(generate_bin_name bin_name)
 	string(FIND  ${CMAKE_CURRENT_SOURCE_DIR} "/" POS REVERSE)
 	math(EXPR POS "${POS}+1")
