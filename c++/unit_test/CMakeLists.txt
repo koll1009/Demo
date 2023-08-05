@@ -4,7 +4,8 @@ target_sources(UNIT_TEST_EXE_NAME
     PRIVATE 
         main.cc
         SmartPointer.cc
-        Lambda.cc)
+        Lambda.cc
+        DeletegatingConstructor.cc)
 target_link_libraries(UNIT_TEST_EXE_NAME PUBLIC koll gtest)
 
 enable_testing()

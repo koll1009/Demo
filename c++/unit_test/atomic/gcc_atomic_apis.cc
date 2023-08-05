@@ -64,30 +64,39 @@ TEST(TESTNAME, atomic_load_and_store_test) {
 }
 
 TEST(TESTNAME, atomic_fetch_add_memory_order_test) {
-  int stats = 0;
+  uint stats = 0;
+  int stop = false;
 
-  auto fetch = [&stats](int n) {
-    for (int i = 1; i <= n; i++) {
-      __atomic_fetch_add(&stats, 1, __ATOMIC_RELAXED);//Don't care about memory reordering
+  auto store1 = [&]() {
+    while (!stop) {
+      __atomic_store_n(&stats, 0, __ATOMIC_RELAXED);//always write 0
+    }
+  };
+
+  auto store2 = [&]() {
+    while (!stop) {
+      __atomic_store_n(&stats, 0XFFFFFFFF, __ATOMIC_RELAXED);//always write 0
     }
   };
 
 
-  auto load = [&stats](int n) {
-    int ret[n];
-    for (int i = 0; i < n; i++) {
-      ret[i] =  __atomic_load_n(&stats, __ATOMIC_RELAXED);
+  auto load = [&]() {
+    while(true) {
+      uint ret = __atomic_load_n(&stats, __ATOMIC_RELAXED);
+      std::cout << ret << "\n";
+      if (ret!=0 && ret!= 0xFFFFFFFF){
+        stop = true;
+        std::cout << "reorder happens\n";
+        break;
+      }
     }
-    for (int i = 0; i < n; i++) {
-          std::cout << ret[i] <<" ";
-    }
-    std::cout << "\n";
   };
-
-  std::thread fetch_thread = std::thread(fetch, 1000000);
-  std::thread load_thread = std::thread(load, 100);
-
-  fetch_thread.join();
-  load_thread.join();
+  
+  std::thread t1{store1};
+  std::thread t2(store2);
+  std::thread t3{load};
+  t1.join();
+  t2.join();
+  t3.join();
 
 }
