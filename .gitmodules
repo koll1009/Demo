@@ -1,3 +1,6 @@
 [submodule "3pp/gtest"]
 	path = 3pp/gtest
 	url = git@github.com:koll1009/googletest.git
+[submodule "jemalloc"]
+	path = 3pp/jemalloc
+	url = https://github.com/jemalloc/jemalloc.git
