@@ -16,5 +16,14 @@ else()
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-add_subdirectory(3pp/gtest)
+message("build jemalloc first")
+execute_process(COMMAND /bin/sh ../../prebuild.sh
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc
+    OUTPUT_FILE log.txt
+)
+
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/include/)
+
+add_subdirectory(3pp)
 add_subdirectory(c++)

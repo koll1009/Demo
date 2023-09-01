@@ -1,15 +1,17 @@
-add_executable(UNIT_TEST_EXE_NAME "")
-
-target_sources(UNIT_TEST_EXE_NAME
-    PRIVATE 
+koll_add_test(
+    TEST_NAME
+        UNIT_TEST_EXE_NAME
+    PRIVATE
         main.cc
         SmartPointer.cc
         Lambda.cc
-        DeletegatingConstructor.cc)
-target_link_libraries(UNIT_TEST_EXE_NAME PUBLIC koll gtest)
-
-enable_testing()
-add_test(NAME UNIT_TEST_EXE_NAME COMMAND UNIT_TEST_EXE_NAME )
+        DeletegatingConstructor.cc
+        jemalloc/jemallocTS.cc
+    DEPENDENCIES
+        gtest
+        koll
+        jemalloc
+)
 
 add_subdirectory(lock)
 add_subdirectory(atomic)

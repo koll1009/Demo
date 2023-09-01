@@ -6,6 +6,5 @@ koll_add_lib(
 LIB_NAME
     ${LIB}
 PRIVATE
-  Test.cpp
   Common.cpp
   kSpinLock.cc)

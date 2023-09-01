@@ -1,14 +1,13 @@
 #include <iostream>
 #include <algorithm>
 #include <memory>
-#include "Test.h"
 #include <functional>
 #include "Common.h"
 #include "gtest/gtest.h"
 using namespace  std;
 TEST(StdTest, SmartPointerTest)
 {
-    cout << "Test Begin \n";
+    /* cout << "Test Begin \n";
     auto shared = std::make_shared<koll::Test>(1, 2);
     cout << "shared poiter counter: " << shared.use_count() << "\n";
     auto shared_incr = shared;
@@ -20,7 +19,7 @@ TEST(StdTest, SmartPointerTest)
         cout << "shared poiter counter: " << shared.use_count() << "\n";
     }
     cout << "shared poiter counter: " << shared.use_count() << "\n";
-
+ */
     int array[] = { 7, 9, 7, 2, 0, 4 }; 
     std::sort(begin(array), end(array), std::less<int>());
     for(auto e:array){
