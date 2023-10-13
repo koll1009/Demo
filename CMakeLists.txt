@@ -16,6 +16,10 @@ else()
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+#some packages are provided by cmake, such as Git, located in /usr/share/cmake-3.16/Modules/
+find_package(Git REQUIRED)
+find_package(PkgConfig REQUIRED)
+
 message("build jemalloc first")
 execute_process(COMMAND /bin/sh ../../prebuild.sh
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc
