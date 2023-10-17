@@ -26,6 +26,13 @@ execute_process(COMMAND /bin/sh ../../prebuild.sh
     OUTPUT_FILE log.txt
 )
 
+#generate visualized dependency
+add_custom_target(graphviz ALL
+    COMMAND ${CMAKE_COMMAND} "--graphviz=foo.dot" .
+    COMMAND dot -Tpng foo.dot -o foo.png
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
+)
+
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/lib)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/include/)
 
