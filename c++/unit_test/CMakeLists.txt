@@ -7,11 +7,11 @@ koll_add_test(
         Lambda.cc
         DeletegatingConstructor.cc
         jemalloc/jemallocTS.cc
+        lock/lock_guard.cc
     DEPENDENCIES
         gtest
         koll
         jemalloc
 )
 
-add_subdirectory(lock)
 add_subdirectory(atomic)
