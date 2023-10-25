@@ -23,7 +23,6 @@ find_package(PkgConfig REQUIRED)
 message("build jemalloc first")
 execute_process(COMMAND /bin/sh ../../prebuild.sh
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc
-    OUTPUT_FILE log.txt
 )
 
 #generate visualized dependency

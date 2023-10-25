@@ -1,0 +1,5 @@
+option(CEHCK_SANITIZER "check sanitizer" OFF)
+if (CEHCK_SANITIZER)
+    set(SNITIZER_CHECK -fsanitize=undefined -fsanitize=address)
+    add_compile_options(${SNITIZER_CHECK})
+endif()
