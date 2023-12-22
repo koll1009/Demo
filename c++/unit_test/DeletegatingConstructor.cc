@@ -1,5 +1,12 @@
+#include "kTimer.h"
+#include "kTimerManager.h"
+#include <bits/types/struct_timeval.h>
+#include <condition_variable>
+#include <cstdint>
 #include <iostream>
 #include "gtest/gtest.h"
+#include <sys/select.h>
+
 using namespace std;
 
 #define TESTNAME CPP_DELEGATING_CONSTRUCTOR_TEST
@@ -41,4 +48,15 @@ TEST(TESTNAME, delegating_constructor_test)
     test a3(1, 2);
     EXPECT_EQ(a3.getA(), 1);
     EXPECT_EQ(a3.getB(), 2);
+}
+
+TEST(TESTNAME, delegating_constructor_test_timer)
+{
+    uint32_t now = 622478;
+    kTimerManager mgr(now);
+    uint32_t timout = now + 322222222;
+    kTimer* t = new kTimer(timout); 
+    std::cout << "timeout: " << timout << "\n";
+    mgr.insert(t);
+    mgr.process(1);
 }

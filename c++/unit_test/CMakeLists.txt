@@ -8,10 +8,14 @@ koll_add_test(
         DeletegatingConstructor.cc
         jemalloc/jemallocTS.cc
         lock/lock_guard.cc
+        opendir/opendirTs.cc
+        api/strncmp.cc
     DEPENDENCIES
         gtest
         koll
         jemalloc
+        timer
 )
 
 add_subdirectory(atomic)
+add_subdirectory(jemalloc)

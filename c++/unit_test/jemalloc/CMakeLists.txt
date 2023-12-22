@@ -1,0 +1,9 @@
+koll_add_test(
+    TEST_NAME
+        jemalloc_unit_test
+    PRIVATE
+        jemallocTS.cc
+    DEPENDENCIES
+        gtest
+        jemalloc
+)

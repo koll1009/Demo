@@ -1,0 +1,45 @@
+@startuml
+scale 300 width
+
+state STATE_INITIAL {
+  erc_long_poll_do_reconnect --> erc_long_poll_reconnect_timeout
+  erc_long_poll_reconnect_timeout --> STATE_CONNECTING : EVENT_GET
+
+  STATE_CONNECTED --> erc_long_poll_do_disconnect
+}
+
+state STATE_CONNECTING {
+  erc_long_poll_do_connect --> erc_long_poll_on_connect
+}
+
+state STATE_CONNECTED {
+  state "NULL"
+}
+  
+state STATE_WAITING_RESPONSE {
+  erc_long_poll_do_connected --> erc_transaction_start
+  erc_transaction_start: erc_rules_transaction_start 
+  erc_transaction_start --> erc_rules_transaction_send_http_request
+  erc_rules_transaction_send_http_request --> erc_rules_transaction_on_request_sent : on request
+  erc_rules_transaction_on_request_sent --> erc_rules_transaction_retry : error
+  erc_rules_transaction_retry --> erc_transaction_update_stats_and_retry_or_drop
+  erc_transaction_update_stats_and_retry_or_drop --> erc_transaction_trigger_deferred_send: shall retry
+  erc_transaction_trigger_deferred_send --> erc_transaction_on_defer_send
+  erc_transaction_on_defer_send --> on_resend_or_retry
+  on_resend_or_retry: erc_long_poll_on_resend_or_retry
+  on_resend_or_retry --> STATE_INITIAL : EVENT_DISCONNECTED
+
+  erc_transaction_update_stats_and_retry_or_drop --> erc_transaction_trigger_abort: abort
+  erc_rules_transaction_send_http_request --> erc_rules_transaction_on_get_response : on response
+  erc_rules_transaction_on_get_response --> on_done
+  on_done: erc_long_poll_on_done
+  on_done --> STATE_CONNECTED : EVENT_GET_DONE
+}
+
+STATE_INITIAL --> STATE_CONNECTING : EVENT_GET
+
+STATE_CONNECTING --> STATE_WAITING_RESPONSE : EVENT_CONNECTED
+
+STATE_CONNECTING --> STATE_INITIAL : EVENT_DISCONNECTED
+
+@enduml

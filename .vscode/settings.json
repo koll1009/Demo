@@ -6,5 +6,9 @@
     "C_Cpp.formatting": "disabled",
     "ccls.cache.directory": "/home/koll/.ccls-cache",
     "ccls.completion.detailedLabel": true,
-    "ccls.misc.compilationDatabaseDirectory": "./build"
+    "ccls.misc.compilationDatabaseDirectory": "./build",
+    "clangd.arguments": [
+        "--compile-commands-dir=build",
+        "-j=8"
+    ]
 }

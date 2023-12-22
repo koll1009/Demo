@@ -1,3 +1,4 @@
 c++/build/*
 c++/.ccls-cache/*
 build/*
+.cache/

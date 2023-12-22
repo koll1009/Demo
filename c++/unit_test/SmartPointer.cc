@@ -30,5 +30,5 @@ TEST(StdTest, SmartPointerTest)
     cout << "type: " << koll::showMeType(std::ref(array)) << "\n";
 
     auto plus1 = std::bind(std::plus<int>{}, std::placeholders::_1, 1);
-    cout << "plus1 + 2: " << plus1(2) << "\n";
+    cout << "plus1 + 2: " << plus1(2) << "\n"; 
 }
