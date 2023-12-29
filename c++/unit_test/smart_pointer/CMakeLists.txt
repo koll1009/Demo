@@ -6,9 +6,9 @@ koll_add_test(
     TEST_NAME
         ${BIN}
     PRIVATE
-        jemallocTS.cc
+        SmartPointerTS.cc
         ../main.cc
     DEPENDENCIES
         gtest
-        jemalloc
+        koll
 )

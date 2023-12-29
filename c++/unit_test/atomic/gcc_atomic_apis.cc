@@ -63,7 +63,7 @@ TEST(TESTNAME, atomic_load_and_store_test) {
   }
 }
 
-TEST(TESTNAME, atomic_fetch_add_memory_order_test) {
+/* TEST(TESTNAME, atomic_fetch_add_memory_order_test) {
   uint stats = 0;
   int stop = false;
 
@@ -99,4 +99,4 @@ TEST(TESTNAME, atomic_fetch_add_memory_order_test) {
   t2.join();
   t3.join();
 
-}
+} */

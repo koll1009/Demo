@@ -70,6 +70,9 @@ function(koll_add_test)
 		target_include_directories(${TEST_NAME} PUBLIC ${ARG_INCLUDE_DIRECTORIES})
 	endif()
 
+	add_test(NAME ${TEST_NAME}
+			COMMAND $<TARGET_FILE:${TEST_NAME}>)
+
 endfunction()
 
 function(generate_bin_name bin_name)

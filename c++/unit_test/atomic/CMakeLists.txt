@@ -2,7 +2,7 @@ koll_add_test(
     TEST_NAME
         atomic_unit_test
     PRIVATE
-        main.cc
+        ../main.cc
         gcc_sync_apis.cc
         gcc_atomic_apis.cc
         cpp_atomic.cc

@@ -52,11 +52,18 @@ TEST(TESTNAME, delegating_constructor_test)
 
 TEST(TESTNAME, delegating_constructor_test_timer)
 {
-    uint32_t now = 622478;
+    uint32_t now = 0;
     kTimerManager mgr(now);
-    uint32_t timout = now + 322222222;
-    kTimer* t = new kTimer(timout); 
-    std::cout << "timeout: " << timout << "\n";
-    mgr.insert(t);
-    mgr.process(1);
+    kTimer* t = new kTimer(322222222); 
+    mgr.addTimer(t);
+    mgr.addTimer(new kTimer(1111));
+    mgr.addTimer(new kTimer(1));
+    mgr.addTimer(new kTimer(22));
+    mgr.addTimer(new kTimer(133));
+    mgr.addTimer(new kTimer(500));
+    mgr.addTimer(new kTimer(255));
+    mgr.addTimer(new kTimer(65535));
+    mgr.addTimer(new kTimer(111500));
+    mgr.addTimer(new kTimer(65536));
+    mgr.process(10);
 }

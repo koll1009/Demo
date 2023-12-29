@@ -11,6 +11,7 @@ static const int ARRAYSIZE = 1 << ARRAYBITS;
 class kTimer;
 
 using TimerList = std::list<kTimer*>;
+//not thread-safe
 class kTimerManager {
 public:
     kTimerManager(uint32_t ticks)
@@ -19,11 +20,12 @@ public:
     }
 
     ~kTimerManager() = default;
-    void insert(kTimer* timer);
+    void addTimer(kTimer* timer);
     void process(int processes);
 protected:
 private:
     bool cascade(int index);
+    void reInsert(kTimer * timer);
     uint32_t ticks_;
     std::array<TimerList, ARRAYSIZE> timers_[ARRAYS];
 };

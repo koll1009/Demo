@@ -3,19 +3,15 @@ koll_add_test(
         UNIT_TEST_EXE_NAME
     PRIVATE
         main.cc
-        SmartPointer.cc
-        Lambda.cc
-        DeletegatingConstructor.cc
-        jemalloc/jemallocTS.cc
         lock/lock_guard.cc
-        opendir/opendirTs.cc
-        api/strncmp.cc
     DEPENDENCIES
         gtest
         koll
-        jemalloc
-        timer
+        
 )
 
 add_subdirectory(atomic)
 add_subdirectory(jemalloc)
+add_subdirectory(lambda)
+add_subdirectory(smart_pointer)
+add_subdirectory(ktimer_mgr)

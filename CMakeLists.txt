@@ -24,6 +24,8 @@ message("build jemalloc first")
 execute_process(COMMAND /bin/sh ../../prebuild.sh
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc
 )
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/lib)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/include/)
 
 #generate visualized dependency
 add_custom_target(graphviz ALL
@@ -31,9 +33,7 @@ add_custom_target(graphviz ALL
     COMMAND dot -Tpng foo.dot -o foo.png
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}"
 )
-
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/lib)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/3pp/jemalloc/include/)
+enable_testing()
 
 add_subdirectory(3pp)
 add_subdirectory(c++)
