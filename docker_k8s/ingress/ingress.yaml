@@ -1,12 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: myingress
+  name: my-ingress
   labels:
-    name: myingress
+    name: my-ingress
 spec:
+  ingressClassName: nginx
   rules:
-  - host: <Host>
+  - host: localhost
     http:
       paths:
       - pathType: Prefix
