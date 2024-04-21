@@ -19,5 +19,6 @@ void double_(T&& t)
     t <<= 1; 
 }
 
+
 }
 #endif
