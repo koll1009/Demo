@@ -4,6 +4,7 @@ koll_add_test(
     PRIVATE
         main.cc
         lock/lock_guard.cc
+        univeral_ref.cc
     DEPENDENCIES
         gtest
         koll

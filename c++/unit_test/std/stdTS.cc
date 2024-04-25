@@ -10,13 +10,15 @@
 #include <vector>
 using namespace  std;
 
-ostream& operator<< (ostream& os, std::vector<int>& vec){
-    for(auto iter : vec){
+template<typename  T>
+ostream& operator<< (ostream& os, std::vector<T>& vec){
+    for(auto& iter : vec){
         os << iter << "\t";
     }
     os << "\n";
     return os;
 }
+
  /* It is used to remove all instances of a certain value from a range.
   * However, it doesn't actually delete or resize the container, but rather moves all elements
   * that are not to be removed to the front of the range, and leaves the "removed" elements in a valid
@@ -36,18 +38,61 @@ TEST(StdTest, StdRemoveTest)
     ASSERT_GT(originalSize, array.size());
     ASSERT_EQ(originalSize, array.size() + 2);std::vector<int>::iterator a;
 }
+class element {
+public:
+    element(int value):value_(value){
+
+    }
+    friend ostream& operator<<(ostream&os, const element& obj){
+        os << obj.value_;
+        return os;
+    }
+
+    bool operator<(const element& other){
+        return this->value_ < other.value_;
+    }
+
+    bool operator>(const element& other){
+        return this->value_ > other.value_;
+    }
+
+    bool operator==(const element& other){
+        return this->value_ == other.value_;
+    }
+
+    bool operator>=(const element& other){
+        return this->value_ >= other.value_;
+    }
+
+    bool operator<=(const element& other){
+        return this->value_ <= other.value_;
+    }        
+    int getValue() {return value_;}
+private:
+    int value_;
+};
+
+
+
 
 TEST(StdTest, StdSortTest)
 {
-/*     std::vector<int> array = {1, 2, 3, 3, 4, 5};
-    int originalSize = array.size();
-    auto iter = std::remove(array.begin(), array.end(), 3);
-    ASSERT_EQ(array.size(), originalSize);
-    ASSERT_EQ(iter, 3);
+    vector<element> vec;
+    vec.emplace_back(3);
+    vec.emplace_back(1);
+    vec.emplace_back(2);
+    vec.emplace_back(5);
+    vec.emplace_back(4);
+    vec.emplace_back(2);
 
-    array.erase(iter, array.end());
-    ASSERT_GT(originalSize, array.size());
-    ASSERT_EQ(originalSize, array.size() + 2);std::vector<int>::iterator a; */
+    cout << vec;
+    std::sort(vec.begin(), vec.end());
+    cout << vec;
+
+    std::sort(vec.begin(), vec.end(), [](element &l, element &r) {
+      return l > r;
+    });
+    cout << vec;
 }
 
 TEST(StdTest, StdCountTest)
@@ -157,9 +202,4 @@ TEST(StdTest, StdBindTest)
     ASSERT_GT(originalSize, array.size());
     ASSERT_EQ(originalSize, array.size() + 2);std::vector<int>::iterator a; */
 }
-
-
-
-
-
 
