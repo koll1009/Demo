@@ -52,7 +52,8 @@ function(koll_add_test)
 	set(multiValueArgs PRIVATE PUBLIC INTERFACE DEPENDENCIES INCLUDE_DIRECTORIES)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
 
-	set(TEST_NAME ${ARG_TEST_NAME})
+	string(CONCAT BIN ${ARG_TEST_NAME} "TS")
+	set(TEST_NAME ${BIN})
 	set(TEST_LABEL ${ARG_TEST_LABEL})
 
 	add_executable(${TEST_NAME} "")

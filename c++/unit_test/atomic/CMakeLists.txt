@@ -1,6 +1,6 @@
 koll_add_test(
     TEST_NAME
-        atomic_unit_test
+        atomic
     PRIVATE
         ../main.cc
         gcc_sync_apis.cc

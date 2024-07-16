@@ -2,7 +2,21 @@
 #define CPP_kOLL_COMMON_H
 #include <string>
 #include <typeinfo>
+#include <ostream>
+#include <vector>
+
+using namespace std;
+
 namespace koll {
+
+template<typename  T>
+ostream& operator<< (ostream& os, std::vector<T>& vec){
+    for(auto& iter : vec){
+        os << iter << "\t";
+    }
+    os << "\n";
+    return os;
+}
     
 template<typename T>
 std::string showMeType(T&& t)
