@@ -5,8 +5,8 @@ koll_add_test(
     TEST_NAME
         ${BIN}
     PRIVATE
-        LambdaTS.cc
         ../main.cc
+        variant.cc
     DEPENDENCIES
         gtest
         koll

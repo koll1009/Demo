@@ -11,6 +11,7 @@ koll_add_test(
         bind.cc
         count.cc
         count_if.cc
+        find.cc
         ../main.cc
     DEPENDENCIES
         gtest

@@ -13,7 +13,8 @@ koll_add_test(
 
 add_subdirectory(atomic)
 add_subdirectory(jemalloc)
-add_subdirectory(lambda)
 add_subdirectory(smart_pointer)
 add_subdirectory(ktimer_mgr)
 add_subdirectory(std)
+add_subdirectory(data_structure)
+add_subdirectory(cpp_features)

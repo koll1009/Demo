@@ -1,6 +1,11 @@
 #include <iostream>
 #include "gtest/gtest.h"
+#include <iterator>
+#include <vector>
+#include "Common.h"
+
 using namespace std;
+using namespace koll;
 
 /* [] captures no variables (cannot be omitted).
 
@@ -34,4 +39,11 @@ TEST(StdTest, LambdaTest)
         return a += (b += arg1);
     };
     cout << "func5(2): " << func5(2) << " a:" << a  << " b:" << b << "\n";
+
+    std::vector<int> test_sort = {3, 2, 1, 5, 4};
+    std::sort(std::begin(test_sort), std::end(test_sort), [](int l, int r){ return l < r;});
+    std::cout << test_sort;
+
+    std::sort(std::begin(test_sort), std::end(test_sort), [](int l, int r){ return l > r;});
+    std::cout << test_sort;
 }
