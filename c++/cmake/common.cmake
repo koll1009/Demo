@@ -13,18 +13,6 @@ function(test_func_args)
   cmake_parse_arguments(test_arg "${options}" "${oneValueArgs}" "${multiArgs}" ${ARGN})
 endfunction()
 
-#[[ function(koll_add_lib)
-	set(options "")
-	set(oneValueArgs LIB_NAME)
-	set(multiArgs PUBLIC PRIVATE)
-	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiArgs}" ${ARGN})
-	add_library(${ARG_LIB_NAME} SHARED)
-	message("library name is [${ARG_LIB_NAME}]")
-	target_sources(${ARG_LIB_NAME} PRIVATE ${ARG_PRIVATE})
-	target_sources(${ARG_LIB_NAME} PUBLIC ${ARG_PUBLIC})
-	target_include_directories(${ARG_LIB_NAME} INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
-endfunction() ]]
-
 function(koll_add_lib)
 	set(options "")
 	set(oneValueArgs LIB_NAME)
@@ -49,11 +37,13 @@ endfunction()
 
 function(koll_add_test)
 	set(oneValueArgs TEST_NAME)
-	set(multiValueArgs PRIVATE PUBLIC INTERFACE DEPENDENCIES INCLUDE_DIRECTORIES)
+	set(multiValueArgs PRIVATE PUBLIC INTERFACE DEPENDENCIES INCLUDE_LINK_DIRECTORIES)
 	cmake_parse_arguments(ARG "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN} )
 
 	string(CONCAT BIN ${ARG_TEST_NAME} "TS")
 	set(TEST_NAME ${BIN})
+	message(${TEST_NAME})
+
 	set(TEST_LABEL ${ARG_TEST_LABEL})
 
 	add_executable(${TEST_NAME} "")
@@ -64,11 +54,11 @@ function(koll_add_test)
 			INTERFACE
 			${ARG_INTERFACE}
 			)
+			
+	target_link_libraries(${TEST_NAME}  PRIVATE ${ARG_DEPENDENCIES} )
 
-	target_link_libraries(${TEST_NAME}  ${ARG_DEPENDENCIES})
-
-	if(ARG_INCLUDE_DIRECTORIES)
-		target_include_directories(${TEST_NAME} PUBLIC ${ARG_INCLUDE_DIRECTORIES})
+	if(ARG_INCLUDE_LINK_DIRECTORIES)
+		set(CMAKE_INSTALL_RPATH_USE_LINK_PATH ${ARG_INCLUDE_LINK_DIRECTORIES})
 	endif()
 
 	add_test(NAME ${TEST_NAME}

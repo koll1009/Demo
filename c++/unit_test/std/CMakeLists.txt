@@ -9,9 +9,19 @@ koll_add_test(
         sort.cc
         function.cc
         bind.cc
-        count.cc
-        count_if.cc
-        find.cc
+        count/count.cc
+        count/count_if.cc
+        count/all_of.cc
+        count/any_of.cc
+        count/none_of.cc
+        find/find.cc
+        find/find_if.cc
+        find/find_if_not.cc
+        find/find_first_of.cc
+        find/find_end.cc
+        find/search.cc
+        find/search_n.cc
+        find/adjacent_find.cc
         ../main.cc
     DEPENDENCIES
         gtest

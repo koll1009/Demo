@@ -1,6 +1,5 @@
 #!/bin/bash
-#autoconf && ./configure && make -j 12
-make -j 12
+#autoconf && ./configure --enable-debug && make -j 12
 
 if [ $? -eq 0 ]; then
     echo "jemalloc build success"

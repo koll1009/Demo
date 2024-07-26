@@ -15,6 +15,11 @@ koll_add_test(
         chrono.cc
         tuple.cc
         Lambda.cc
+        nested_namespaces.cc
+        variable_defined_in_if.cc
+        if_constexpr.cc
+        shared_ptr.cc
+        universal_ref.cc
     DEPENDENCIES
         gtest
         koll

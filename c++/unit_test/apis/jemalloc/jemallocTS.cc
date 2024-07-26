@@ -1,7 +1,5 @@
 #include <iostream>
 #include "gtest/gtest.h"
-#include <thread>
-#include <atomic>
 #include <jemalloc/jemalloc.h>
 
 using namespace std;

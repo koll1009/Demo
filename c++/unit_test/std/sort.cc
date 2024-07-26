@@ -15,7 +15,7 @@ public:
 
   bool operator<(const element &other) { return this->value_ < other.value_; }
 
-  bool operator>(const element &other) { return this->value_ > other.value_; }
+  bool operator>(const element &other) const { return this->value_ > other.value_; }
 
   bool operator==(const element &other) { return this->value_ == other.value_; }
 
@@ -41,6 +41,6 @@ TEST(StdTest, StdSortTest) {
   cout << vec;
 
   std::sort(vec.begin(), vec.end(),
-            [](element &l, element &r) { return l > r; });
+            [](const element &l, const element &r) { return l > r; });
   cout << vec;
 }

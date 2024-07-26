@@ -4,16 +4,13 @@ koll_add_test(
     PRIVATE
         main.cc
         lock/lock_guard.cc
-        univeral_ref.cc
     DEPENDENCIES
         gtest
         koll
         
 )
 
-add_subdirectory(atomic)
-add_subdirectory(jemalloc)
-add_subdirectory(smart_pointer)
+add_subdirectory(apis)
 add_subdirectory(ktimer_mgr)
 add_subdirectory(std)
 add_subdirectory(data_structure)
