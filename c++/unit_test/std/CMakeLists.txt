@@ -6,7 +6,6 @@ koll_add_test(
         ${BIN}
     PRIVATE
         remove.cc
-        sort.cc
         function.cc
         bind.cc
         count/count.cc
@@ -22,6 +21,14 @@ koll_add_test(
         find/search.cc
         find/search_n.cc
         find/adjacent_find.cc
+        sort/sort.cc
+        sort/stable_sort.cc
+        sort/max_element.cc
+        sort/min_element.cc
+        sort/shuffle.cc
+        sort/upper_bound.cc
+        sort/lower_bound.cc
+        sort/partial_sort.cc
         ../main.cc
     DEPENDENCIES
         gtest
