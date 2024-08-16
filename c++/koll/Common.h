@@ -1,5 +1,7 @@
 #ifndef CPP_kOLL_COMMON_H
 #define CPP_kOLL_COMMON_H
+#include <algorithm>
+#include <iterator>
 #include <string>
 #include <typeinfo>
 #include <ostream>
@@ -11,11 +13,10 @@ namespace koll {
 
 template<typename  T>
 ostream& operator<< (ostream& os, std::vector<T>& vec){
-    for(auto& iter : vec){
-        os << iter << "\t";
-    }
-    os << "\n";
-    return os;
+  std::for_each(std::begin(vec), std::end(vec),
+                [&os](T &t) { os << t << "\t"; });
+  os << "\n";
+  return os;
 }
     
 template<typename T>

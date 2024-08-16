@@ -5,9 +5,13 @@ koll_add_test(
     TEST_NAME
         ${BIN}
     PRIVATE
+        accumulate.cc
+        for_each.cc
         remove.cc
         function.cc
+        copy_if.cc
         bind.cc
+        decay.cc
         count/count.cc
         count/count_if.cc
         count/all_of.cc
@@ -29,6 +33,7 @@ koll_add_test(
         sort/upper_bound.cc
         sort/lower_bound.cc
         sort/partial_sort.cc
+        sort/nth_element.cc
         ../main.cc
     DEPENDENCIES
         gtest
