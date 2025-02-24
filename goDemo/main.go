@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"goDemo/koll"
 	"io"
 	"net/http"
 	"os"
@@ -29,6 +30,7 @@ func startServer() {
 }
 
 func main() {
+	fmt.Println(koll.Add(1, 2))
 	msg, err := hello("koll")
 	fmt.Println(msg)
 	if err != nil {
