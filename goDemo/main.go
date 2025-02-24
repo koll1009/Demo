@@ -5,10 +5,13 @@ import (
 	"errors"
 	"fmt"
 	"goDemo/koll"
+	kio "goDemo/koll/io"
 	"io"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/fsnotify/fsnotify"
 )
 
 func hello(name string) (string, error) {
@@ -42,6 +45,12 @@ func main() {
 	fmt.Println(m)
 
 	go startServer()
+
+	dir, _ := os.Getwd()
+	kio.NewWatcher(dir, func(event fsnotify.Event) {
+		fmt.Println(event)
+	})
+
 	reader := bufio.NewReader(os.Stdin)
 	for {
 		cmd, err := reader.ReadString('\n')

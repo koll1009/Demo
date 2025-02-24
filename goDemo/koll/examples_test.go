@@ -1,11 +1,19 @@
 package koll
 
 import (
+	"context"
 	"fmt"
 	"goDemo/koll/example"
+	kio "goDemo/koll/io"
+	"os"
+	"os/signal"
 	"reflect"
 	"strings"
+	"syscall"
 	"testing"
+	"time"
+
+	"github.com/fsnotify/fsnotify"
 )
 
 func TestAdd(t *testing.T) {
@@ -209,4 +217,52 @@ func TestChannel(t *testing.T) {
 
 	fmt.Println("in main rountine")
 	c <- 8
+}
+
+func TestOssignal(t *testing.T) {
+	sig := make(chan os.Signal, 1)
+	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
+	ctx, cancel_cb := context.WithCancel(context.Background())
+	go func() {
+		select {
+		case s := <-sig:
+			switch s {
+			case syscall.SIGINT, syscall.SIGTERM:
+				fmt.Println(s)
+			}
+		case <-ctx.Done():
+			fmt.Println("cancel from main thread")
+		}
+		fmt.Println("quit go routine")
+	}()
+
+	// 获取当前进程
+	process, err := os.FindProcess(os.Getpid())
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Printf("ID of current process is :%d\n", process.Pid)
+
+	// 发送 Kill 信号
+	/* 	err = process.Signal(os.Kill)
+	   	if err != nil {
+	   		fmt.Println("Error sending signal:", err)
+	   	} */
+	cancel_cb()
+	time.Sleep(5 * time.Second)
+}
+
+func TestWatcher(t *testing.T) {
+	dir, _ := os.Getwd()
+	fmt.Println(dir)
+	cb := func(event fsnotify.Event) {
+		fmt.Println(event)
+	}
+	kio.NewWatcher(dir, cb)
+
+	for {
+
+	}
 }
