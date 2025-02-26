@@ -47,9 +47,11 @@ func main() {
 	go startServer()
 
 	dir, _ := os.Getwd()
-	kio.NewWatcher(dir, func(event fsnotify.Event) {
+	err = kio.NewWatcher(dir, func(event fsnotify.Event) {
 		fmt.Println(event)
 	})
+
+	fmt.Println(dir, err)
 
 	reader := bufio.NewReader(os.Stdin)
 	for {
